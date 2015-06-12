@@ -1,4 +1,4 @@
-﻿/**********************************************************
+/**********************************************************
 
 ADOBE SYSTEMS INCORPORATED 
 Copyright 2005-2012 Adobe Systems Incorporated 
@@ -16,15 +16,20 @@ written permission of Adobe.
 
 /**********************************************************
  
-ImageTracing.jsx
+Based on ImageTracing.jsx and a few other online sources. Recoded a bit for cleaner.
 
 DESCRIPTION
 
-This sample gets files specified by the user from the 
-selected folder and batch processes them and saves them 
-as AI files in the user desired destination with the same 
-file name after tracing the raster arts in the files.
- 
+This is a kludge. Anyone who knows what they're doing can probably do this better. What it does:
+
+1) Select source and destination folders, and for each compatible file in the source folder
+    -Compatible files are by type, case sensitive (Much to my surprise a couple times)
+2) Load file to 10Kx10K pixel artboard
+3) Fit art to board proportionally, filling it. Proportionally, this usually saves over by a few pixels
+4) Export specified file type to destination folder
+
+Things I may get to, but probably won't: Dialogue to set specific art output sizes.
+
 **********************************************************/
 
 //Goal: Adapt  tracing script to trace an image using a specifc preset rather than the default one. Included jp2 as a valid file type.
@@ -74,6 +79,8 @@ if(sourceFolder != null && destFolder != null)
                         
                         // Trace the files by placing them in the document.
                         // Add a document in the app of 10000x10000 points
+                        // Change the 10000,10000 below to a different doc size if desired
+                        // Art (files imported) will be fit proportionally to artboard
                         // Remove stuff in paren for default doc size
                         
                         var doc = app.documents.add( null , 10000,10000);
